@@ -10,20 +10,18 @@ class WebClient {
     }
 
     bindEvents() {
-        // Обработчик формы логина
         document.getElementById('loginForm').addEventListener('submit', (e) => {
             e.preventDefault();
             this.handleLogin();
         });
 
-        // Обработчик кнопки выхода
         document.getElementById('logoutBtn').addEventListener('click', () => {
             this.handleLogout();
         });
     }
 
     checkAuth() {
-        // Проверяем, есть ли сохраненная сессия
+
         const savedUser = localStorage.getItem('currentUser');
         if (savedUser) {
             this.currentUser = JSON.parse(savedUser);
@@ -36,22 +34,18 @@ class WebClient {
     handleLogin() {
         const username = document.getElementById('username').value;
         const password = document.getElementById('password').value;
-        
-        // Простая валидация
+
         if (!username || !password) {
             this.showMessage('Пожалуйста, заполните все поля', 'error');
             return;
         }
 
-        // Здесь должна быть реальная проверка с сервером
-        // Для демонстрации используем mock авторизацию
         if (this.mockAuth(username, password)) {
             this.currentUser = {
                 username: username,
                 loginTime: new Date().toLocaleString()
             };
-            
-            // Сохраняем в localStorage
+
             localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
             
             this.showMainScreen();
@@ -62,7 +56,6 @@ class WebClient {
     }
 
     mockAuth(username, password) {
-        // Mock авторизация - в реальном приложении здесь будет запрос к серверу
         const validUsers = [
             { username: 'admin', password: 'admin123' },
             { username: 'user', password: 'user123' },
@@ -89,8 +82,7 @@ class WebClient {
     showMainScreen() {
         document.getElementById('loginScreen').classList.remove('active');
         document.getElementById('mainScreen').classList.add('active');
-        
-        // Обновляем приветствие
+
         if (this.currentUser) {
             document.getElementById('userGreeting').textContent = 
                 `Добро пожаловать, ${this.currentUser.username}!`;
@@ -102,8 +94,7 @@ class WebClient {
         messageEl.textContent = text;
         messageEl.className = `message ${type}`;
         messageEl.style.display = 'block';
-        
-        // Автоматически скрываем сообщение через 3 секунды
+
         setTimeout(() => {
             messageEl.style.display = 'none';
         }, 3000);
@@ -114,7 +105,6 @@ class WebClient {
     }
 }
 
-// Инициализация приложения когда DOM загружен
 document.addEventListener('DOMContentLoaded', () => {
     new WebClient();
 });
