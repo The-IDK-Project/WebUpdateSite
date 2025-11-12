@@ -19,7 +19,6 @@ body {
     display: block;
 }
 
-/* Стили для экрана логина */
 .login-container {
     background: white;
     padding: 2rem;
@@ -110,7 +109,6 @@ body {
     border: 1px solid #c3e6cb;
 }
 
-/* Стили для основного интерфейса */
 .header {
     background: white;
     padding: 1rem 2rem;
